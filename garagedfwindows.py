@@ -8,35 +8,41 @@ schema = StructType([StructField("CID",IntegerType(),nullable=False),
                                              StructField("CADD",StringType(),nullable=True),
                                              StructField("C_CONTACT",IntegerType(),nullable=True),
                                              StructField("C_CREDITDAYS",IntegerType(),nullable=False),
-                                             StructField("CJ_DATE",DateType(),nullable=True),
+                                             StructField("CJ_DATE",StringType(),nullable=True),
                                              StructField("SEX",StringType(),nullable=True)])
-cust_ = spark.read.csv('/home/mike/garage/customer.csv',header=True,inferSchema=True)
+# cust_ = spark.read.csv(r"D:\garage\customer.csv",header=True,schema = schema)
 # cust_.show()
 # cust_.printSchema()
+
+
 # customer =  cust_.withColumn("CJ_DATE",to_date(cust_["CJ_DATE"],'yyyy/MM/dd'))
 
-emp_ = spark.read.csv('/home/mike/garage/employee.csv',header=True,inferSchema=True)
+# emp_ = spark.read.csv(r"D:\garage\employee.csv",header=True,inferSchema=True)
 # emp_.show()
 # emp_.printSchema()
+#
 # employ = emp_.withColumn("EDOJ",to_date(emp_["EDOJ"],'d-M-yyyy'))
 # employee = employ.withColumn("EDOL",to_date(emp_["EDOL"],'d-M-yyyy'))
 # employee.show()
+# employee.printSchema()
 
-pur_ = spark.read.csv('/home/mike/garage/purchase.csv',header=True,inferSchema=True)
-pur_.show()
-pur_.printSchema()
+# pur_ = spark.read.csv(r"D:\garage\purchase.csv",header=True,inferSchema=True)
+#
+# purchase = pur_.withColumn("PDATE",to_date(pur_["PDATE"],'d-M-yyyy'))
+# purchase.show()
+# purchase.printSchema()
 
-ser_ = spark.read.csv('/home/mike/garage/ser_det.csv',header=True,inferSchema= True)
-ser_.show()
-ser_.printSchema()
+#
+# ser_ = spark.read.csv(r"D:\garage\ser_det.csv",header=True,inferSchema= True)
+#
+# service = ser_.withColumn("SER_DATE",to_date(ser_["SER_DATE"],'d-M-yyyy'))
+# service.printSchema()
 
-spa_ = spark.read.csv('/home/mike/garage/sparepart.csv',header=True,inferSchema=True)
-spa_.show()
-spa_.printSchema()
+# sparepart = spark.read.csv(r"D:\garage\sparepart.csv",header=True,inferSchema=True)
+# sparepart.show()
+# sparepart.printSchema()
+#
+ven_ = spark.read.csv(r"D:\garage\vendors.csv",header=True,inferSchema=True)
 
-ven_ = spark.read.csv('/home/mike/garage/vendors.csv',header=True,inferSchema=True)
-ven_.show()
-ven_.printSchema()
-
-df = ven_.withColumn("VJ_DATE",ven_["VJ_DATE"].cast(DateType()))
-df.show()
+vendors = ven_.withColumn("VJ_DATE",to_date(ven_["VJ_DATE"],'d-M-yyyy'))
+vendors.printSchema()
